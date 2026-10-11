@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>EloPlus</title>
+<meta name="description" content="EloPlus — elo boost de Valorant com segurança, rapidez e atendimento personalizado.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/rank-experience.css">
+</head>
+<body>
+
+<!-- ============ ÍCONES (sprite) ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M3.5 10.5 12 3.5l8.5 7V20a1 1 0 0 1-1 1H15v-6.5H9V21H4.5a1 1 0 0 1-1-1z"/></symbol>
+    <symbol id="i-crown" viewBox="0 0 24 24"><path d="M3 7.5 7.5 12 12 4.5 16.5 12 21 7.5 19 18H5z"/><path d="M5 21h14"/></symbol>
+    <symbol id="i-ticket" viewBox="0 0 24 24"><path d="M3 7.5A2.5 2.5 0 0 1 5.5 5h13A2.5 2.5 0 0 1 21 7.5V10a2 2 0 0 0 0 4v2.5a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 16.5V14a2 2 0 0 0 0-4z"/><path d="M14.5 5v14" stroke-dasharray="2 2.4"/></symbol>
+    <symbol id="i-gem" viewBox="0 0 24 24"><path d="M6.5 3.5h11L22 9.5 12 21 2 9.5z"/><path d="M2 9.5h20M12 21 8.5 9.5 12 3.5l3.5 6z"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 6.5h9M17 6.5h3M4 12h3M11 12h9M4 17.5h11M19 17.5h1"/><circle cx="15" cy="6.5" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="17.5" r="2"/></symbol>
+    <symbol id="i-faq" viewBox="0 0 24 24"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4h13A1.5 1.5 0 0 1 20 5.5v10a1.5 1.5 0 0 1-1.5 1.5H10l-5 4v-4h0.5A1.5 1.5 0 0 1 4 15.5z"/><path d="M9.8 8.6a2.3 2.3 0 1 1 3.2 2.1c-.6.3-1 .8-1 1.5"/><path d="M12 14.4v.1"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2.5"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.5"/><path d="M12 1.5v4M12 18.5v4M1.5 12h4M18.5 12h4"/></symbol>
+    <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M8 3.5h8V9a4 4 0 0 1-8 0z"/><path d="M8 5.5H4.5a3.5 3.5 0 0 0 3.8 4.4M16 5.5h3.5a3.5 3.5 0 0 1-3.8 4.4M12 13v4.5M8 20.5h8M9.5 17.5h5"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V4M4 20h16"/><path d="m7.5 15 4-4.5 3 2.5L20 6.5"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13.5 2.5 4.5 14h7l-1 7.5 9-11.5h-7z"/></symbol>
+    <symbol id="i-live" viewBox="0 0 24 24"><rect x="3" y="6.5" width="18" height="13" rx="2.5"/><path d="m8 2.5 4 4 4-4"/><circle cx="8" cy="11" r="1.2" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-solo" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4.5 21a7.5 7.5 0 0 1 15 0"/></symbol>
+    <symbol id="i-agent" viewBox="0 0 24 24"><path d="M12 2.5 20 7v6c0 4.4-3.4 7.6-8 8.5-4.6-.9-8-4.1-8-8.5V7z"/><path d="M8.5 11.5 12 9l3.5 2.5M9.5 15h5"/></symbol>
+    <symbol id="i-scale" viewBox="0 0 24 24"><path d="M12 3.5v17M6 20.5h12M5 7h14"/><path d="m5 7-2.8 6.5a2.9 2.9 0 0 0 5.6 0zM19 7l-2.8 6.5a2.9 2.9 0 0 0 5.6 0z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2.5 20 6v6.5c0 4.3-3.3 7.7-8 9-4.7-1.3-8-4.7-8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+    <symbol id="i-headset" viewBox="0 0 24 24"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="13" width="4.5" height="6.5" rx="1.5"/><rect x="16.5" y="13" width="4.5" height="6.5" rx="1.5"/><path d="M19 19.5c0 1.2-1.3 2-3 2h-2.5"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M9 3.5h6l-1 5.5 3.5 3.5h-11L10 9z"/><path d="M12 12.5V21"/></symbol>
+    <symbol id="i-fire" viewBox="0 0 24 24"><path d="M12 21.5c-4 0-7-2.8-7-6.6 0-3.3 2.3-5.4 3.8-7.5.4 1.6 1.3 2.8 2.4 3.3C11 7 12.5 4.3 14.5 2.5c.3 3 2 4.6 3.2 6.3A8 8 0 0 1 19 14.9c0 3.8-3 6.6-7 6.6z"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M5 5.5h14a1.5 1.5 0 0 1 1.5 1.5v8.5a1.5 1.5 0 0 1-1.5 1.5H11l-4.5 3.5V17H5a1.5 1.5 0 0 1-1.5-1.5V7A1.5 1.5 0 0 1 5 5.5z"/><path d="M8.5 11h.01M12 11h.01M15.5 11h.01"/></symbol>
+    <symbol id="i-hash" viewBox="0 0 24 24"><path d="M9.5 3.5 7.5 20.5M16.5 3.5l-2 17M4 8.5h16.5M3.5 15.5H20"/></symbol>
+    <symbol id="i-camera" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17 6.8v.1"/></symbol>
+    <symbol id="i-music" viewBox="0 0 24 24"><path d="M14 3.5v11.5a3.5 3.5 0 1 1-2.5-3.4V3.5c1 2.7 3 4 6 4.3"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M9 5.5v13M15 5.5v13"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10-6.5z"/></symbol>
+  </defs>
+</svg>
+
+<!-- ============ SIDEBAR ============ -->
+<aside class="sidebar" aria-label="Navegação principal">
+  <a class="brand" href="#home" aria-label="EloPlus — início">
+    <span class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 40 40"><path d="M20 3 36 12v16L20 37 4 28V12z" class="bm-hex"/><path d="M13 22.5 20 15.5l7 7" class="bm-up"/><path d="M13 28 20 21l7 7" class="bm-up bm-up2"/></svg>
+    </span>
+    <span class="brand-text"><b>Elo<em>Plus</em></b><small>Valorant Boost</small></span>
+  </a>
+
+  <nav class="side-nav">
+    <span class="side-label">Menu</span>
+    <a href="#home" class="nav-link is-active" data-section="home"><svg class="ic"><use href="#i-home"/></svg><span>Home</span></a>
+    <a href="#precos" class="nav-link" data-section="precos"><svg class="ic"><use href="#i-crown"/></svg><span>Preços por Divisão</span></a>
+    <a href="#contratar" class="nav-link" data-section="contratar"><svg class="ic"><use href="#i-ticket"/></svg><span>Como Contratar</span></a>
+    <a href="#pacotes" class="nav-link" data-section="pacotes"><svg class="ic"><use href="#i-gem"/></svg><span>Pacotes High Elo</span></a>
+    <a href="#adicionais" class="nav-link" data-section="adicionais"><svg class="ic"><use href="#i-sliders"/></svg><span>Serviços Adicionais</span></a>
+    <a href="#faq" class="nav-link" data-section="faq"><svg class="ic"><use href="#i-faq"/></svg><span>FAQ</span></a>
+  </nav>
+
+  <div class="side-status">
+    <div class="status-row"><span class="pulse" aria-hidden="true"></span><span>Boosters online</span></div>
+    <p>Atendimento pelo ticket no <span class="dc-inline"><img src="assets/social/discord.webp" alt="">Discord</span>.</p>
+    <div class="side-social">
+      <a href="#" class="js-social" data-net="discord" aria-label="Discord"><img src="assets/social/discord.webp" alt=""></a>
+    </div>
+    <button class="btn btn-primary btn-sm js-ticket" type="button"><svg class="ic"><use href="#i-ticket"/></svg><span>Abrir ticket</span></button>
+  </div>
+
+  <div class="side-foot">
+    <button class="theme-toggle js-theme" type="button" aria-label="Alternar entre tema claro e escuro">
+      <span class="tt-track">
+        <span class="tt-label tt-night">Noite</span>
+        <span class="tt-label tt-day">Dia</span>
+        <span class="tt-thumb" aria-hidden="true">
+          <svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="10.5" class="tt-ring"/><path d="M16 3v7M16 22v7M3 16h7M22 16h7" class="tt-lines"/><circle cx="16" cy="16" r="2" class="tt-dot"/></svg>
+        </span>
+      </span>
+    </button>
+  </div>
+</aside>
+
+<!-- barra superior (mobile) -->
+<header class="mobile-bar">
+  <a class="brand" href="#home" aria-label="EloPlus — início">
+    <span class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 40 40"><path d="M20 3 36 12v16L20 37 4 28V12z" class="bm-hex"/><path d="M13 22.5 20 15.5l7 7" class="bm-up"/><path d="M13 28 20 21l7 7" class="bm-up bm-up2"/></svg>
+    </span>
+    <span class="brand-text"><b>Elo<em>Plus</em></b></span>
+  </a>
+  <button class="theme-toggle theme-toggle--compact js-theme" type="button" aria-label="Alternar entre tema claro e escuro">
+    <span class="tt-track">
+      <span class="tt-thumb" aria-hidden="true">
+        <svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="10.5" class="tt-ring"/><path d="M16 3v7M16 22v7M3 16h7M22 16h7" class="tt-lines"/><circle cx="16" cy="16" r="2" class="tt-dot"/></svg>
+      </span>
+    </span>
+  </button>
+</header>
+
+<main class="main">
+
+  <!-- ============ HERO ============ -->
+  <section id="home" class="section hero" data-spy>
+    <div class="hero-card" id="heroCard">
+      <div class="hero-bg" aria-hidden="true">
+        <canvas id="heroParticles"></canvas>
+        <div class="hero-grid"></div>
+        <div class="hero-glow"></div>
+        <div class="hud-corner hud-tl"></div><div class="hud-corner hud-br"></div>
+      </div>
+
+      <div class="hero-content">
+        <p class="eyebrow"><span class="eyebrow-dot"></span>Elo boost · Valorant · Ferro ao Radiante</p>
+        <h1 class="hero-title">Elo<span>Plus</span></h1>
+        <p class="hero-sub">Suba de elo no Valorant com segurança, rapidez e atendimento personalizado.</p>
+        <p class="hero-desc">Boosters de alto elo jogam suas partidas ranqueadas até a divisão que você escolher. Você paga por divisão, adiciona só os extras que quiser e acompanha tudo pelo ticket.</p>
+        <div class="hero-ctas">
+          <a href="#precos" class="btn btn-primary"><span>Ver preços</span><svg class="ic"><use href="#i-arrow"/></svg></a>
+          <button type="button" class="btn btn-ghost js-ticket"><svg class="ic"><use href="#i-ticket"/></svg><span>Abrir ticket</span></button>
+        </div>
+        <dl class="hero-stats">
+          <div><dt>A partir de</dt><dd>R$ 3,90</dd></div>
+          <div><dt>Divisões</dt><dd>24</dd></div>
+          <div><dt>Pacotes</dt><dd>até 15% off</dd></div>
+        </dl>
+      </div>
+
+      <div class="hero-art" id="heroArt">
+        <!-- imagens dos agentes inseridas via JS -->
+      </div>
+
+      <div class="hero-switch" role="tablist" aria-label="Escolher agente em destaque" id="heroSwitch"></div>
+      <button class="hero-pause" id="heroPause" type="button" aria-label="Pausar rotação de agentes"><svg class="ic"><use href="#i-pause"/></svg></button>
+    </div>
+
+    <!-- bento abaixo do hero -->
+    <div class="bento">
+      <article class="card agents-card reveal">
+        <header class="card-head">
+          <h3>Agentes</h3>
+          <span class="mono-tag">15 agentes</span>
+        </header>
+        <div class="agent-thumbs" id="agentThumbs"></div>
+        <p class="card-foot-note">Toque em um agente para trocar o destaque.</p>
+      </article>
+
+      <article class="card route-card reveal">
+        <header class="card-head">
+          <h3>Rota até o topo</h3>
+          <span class="mono-tag">Simulação</span>
+        </header>
+        <p class="route-lead">Escolha um elo e veja quanto custa chegar lá saindo do <b>Ferro 1</b>.</p>
+        <div class="route-ranks" id="routeRanks" role="group" aria-label="Elo de destino"></div>
+        <div class="route-track"><div class="route-fill" id="routeFill"></div></div>
+        <div class="route-result">
+          <div>
+            <span class="rr-label" id="routeLabel">Ferro 1 → Platina 1</span>
+            <span class="rr-steps" id="routeSteps">12 divisões</span>
+          </div>
+          <strong class="rr-price" id="routePrice">R$ 0,00</strong>
+        </div>
+      </article>
+
+      <div class="feature-stack">
+        <article class="card feature reveal">
+          <span class="feature-num">01</span>
+          <div><h4>Conta protegida</h4><p>Chat em modo offline e nenhuma configuração sua alterada durante o boost.</p></div>
+        </article>
+        <article class="card feature reveal">
+          <span class="feature-ic"><svg class="ic"><use href="#i-clock"/></svg></span>
+          <div><h4>Rápido de verdade</h4><p>Pedidos começam assim que o ticket é confirmado. Prioridade disponível.</p></div>
+        </article>
+        <article class="card feature reveal">
+          <span class="feature-ic"><svg class="ic"><use href="#i-headset"/></svg></span>
+          <div><h4>Atendimento direto</h4><p>Você fala com a equipe no ticket do começo ao fim do pedido.</p></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PREÇOS ============ -->
+  <section id="precos" class="section has-art" data-spy>
+    <img class="section-art art-sniper" src="assets/art/sniper.webp" alt="" loading="lazy">
+    <header class="section-head section-head--art reveal">
+      <div>
+        <p class="eyebrow"><span class="eyebrow-dot"></span>Preço por divisão</p>
+        <h2 class="section-title"><svg class="ic title-ic"><use href="#i-crown"/></svg>Valores por Divisão</h2>
+      </div>
+      <p class="section-lead">Cada linha é uma divisão. Para subir várias, some as etapas ou monte o pedido na calculadora. Clique em uma linha para levá-la ao orçamento.</p>
+    </header>
+    <div class="tier-grid" id="tierGrid"></div>
+  </section>
+
+  <!-- ============ CONTRATAR ============ -->
+  <section id="contratar" class="section" data-spy>
+    <div class="hire">
+      <div class="hire-info reveal">
+        <p class="eyebrow"><span class="eyebrow-dot"></span>Como contratar</p>
+        <h2 class="section-title">Quer contratar?</h2>
+        <p class="hire-lead">Abra um ticket no <span class="dc-inline"><img src="assets/social/discord.webp" alt="">Discord</span> em</p>
+        <button class="channel-pill js-copy-channel" type="button" aria-label="Copiar link do Discord">
+          <span>#<span class="js-channel-name">criar-ticket</span></span>
+          <span class="cp-action"><svg class="ic"><use href="#i-copy"/></svg>Copiar</span>
+        </button>
+
+        <p class="hire-sub">No ticket, informe:</p>
+        <ul class="need-list">
+          <li><span class="need-ic"><svg class="ic"><use href="#i-target"/></svg></span><div><b>Elo atual</b><small>Ex.: Ouro 2</small></div></li>
+          <li><span class="need-ic"><svg class="ic"><use href="#i-trophy"/></svg></span><div><b>Elo desejado</b><small>Ex.: Platina 1</small></div></li>
+          <li><span class="need-ic"><svg class="ic"><use href="#i-chart"/></svg></span><div><b>RR atual</b><small>Ex.: 45 RR</small></div></li>
+          <li><span class="need-ic"><svg class="ic"><use href="#i-plus"/></svg></span><div><b>Adicionais desejados</b><small>Ex.: Prioridade</small></div></li>
+        </ul>
+
+        <a class="note-pill" href="#pacotes">
+          <span class="np-heart" aria-hidden="true">💜</span>
+          <span>Para subir o elo completo, confira também nossos <b>pacotes com desconto</b>.</span>
+          <svg class="ic"><use href="#i-arrow"/></svg>
+        </a>
+        <img class="hire-agent" src="assets/agents/reyna.webp" alt="" loading="lazy">
+      </div>
+
+      <!-- calculadora / ticket ilustrativo -->
+      <form class="calc card reveal" id="calc" autocomplete="off">
+        <header class="calc-head">
+          <div class="calc-title">
+            <span class="calc-hash"><svg class="ic"><use href="#i-hash"/></svg></span>
+            <div><b>Monte seu pedido</b><small>Orçamento estimado · cole no ticket</small></div>
+          </div>
+          <span class="mono-tag" id="calcId">TICKET #0427</span>
+        </header>
+
+        <div class="calc-ranks">
+          <div class="field">
+            <label for="calcFrom"><svg class="ic"><use href="#i-target"/></svg>Elo atual</label>
+            <div class="select-wrap">
+              <img src="assets/ranks/ouro.webp" alt="" class="sel-rank" id="calcFromImg">
+              <select id="calcFrom"></select>
+            </div>
+          </div>
+          <span class="calc-arrow" aria-hidden="true"><svg class="ic"><use href="#i-arrow"/></svg></span>
+          <div class="field">
+            <label for="calcTo"><svg class="ic"><use href="#i-trophy"/></svg>Elo desejado</label>
+            <div class="select-wrap">
+              <img src="assets/ranks/platina.webp" alt="" class="sel-rank" id="calcToImg">
+              <select id="calcTo"></select>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="calcRR"><svg class="ic"><use href="#i-chart"/></svg>RR atual <output id="calcRRout" for="calcRR">45 RR</output></label>
+          <input type="range" id="calcRR" min="0" max="99" value="45">
+        </div>
+
+        <fieldset class="field">
+          <legend><svg class="ic"><use href="#i-plus"/></svg>Adicionais desejados</legend>
+          <div class="chip-row" id="calcAddons"></div>
+        </fieldset>
+
+        <div class="calc-sum">
+          <div class="sum-line"><span>Valor das divisões</span><span id="sumBase">R$ 0,00</span></div>
+          <div class="sum-line" id="sumPkgLine" hidden><span class="pkg-hit"><svg class="ic"><use href="#i-fire"/></svg>Pacote aplicado</span><span id="sumPkg"></span></div>
+          <div class="sum-line"><span>Adicionais</span><span id="sumAdd">+0%</span></div>
+          <div class="sum-total"><span>Total estimado</span><strong id="sumTotal">R$ 0,00</strong></div>
+          <p class="sum-note">O RR atual é conferido no ticket e pode ajustar o valor final.</p>
+        </div>
+
+        <div class="calc-actions">
+          <button type="button" class="btn btn-primary" id="calcCopy"><svg class="ic"><use href="#i-copy"/></svg><span>Copiar resumo</span></button>
+          <button type="button" class="btn btn-ghost js-ticket"><svg class="ic"><use href="#i-ticket"/></svg><span>Abrir ticket</span></button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============ PACOTES ============ -->
+  <section id="pacotes" class="section has-art" data-spy>
+    <img class="section-art art-serpent" src="assets/art/serpente.webp" alt="" loading="lazy">
+    <header class="section-head section-head--art reveal">
+      <div>
+        <p class="eyebrow"><span class="eyebrow-dot"></span>Ofertas high elo</p>
+        <h2 class="section-title"><svg class="ic title-ic"><use href="#i-crown"/></svg>Pacotes High Elo</h2>
+      </div>
+      <p class="section-lead">O caminho completo sai mais barato que divisão por divisão. Os selos <b class="hot-inline">🔥</b> marcam as maiores economias.</p>
+    </header>
+    <div class="pkg-grid" id="pkgGrid"></div>
+
+    <!-- CTA 2 -->
+    <div class="cta-banner reveal">
+      <div class="cta-bg" aria-hidden="true"></div>
+      <div class="cta-copy">
+        <p class="eyebrow"><span class="eyebrow-dot"></span>Pronto para subir?</p>
+        <h3>Quer contratar?</h3>
+        <p>Abra um ticket em <button type="button" class="channel-inline js-copy-channel">#<span class="js-channel-name">criar-ticket</span></button> e um booster assume seu pedido.</p>
+        <div class="hero-ctas">
+          <button type="button" class="btn btn-primary btn-lg js-ticket"><svg class="ic"><use href="#i-ticket"/></svg><span>Abrir ticket agora</span></button>
+          <a href="#contratar" class="btn btn-ghost"><span>Solicitar orçamento</span><svg class="ic"><use href="#i-arrow"/></svg></a>
+        </div>
+      </div>
+      <img class="cta-agent" src="assets/agents/clove.webp" alt="" loading="lazy">
+    </div>
+  </section>
+
+  <!-- ============ ADICIONAIS ============ -->
+  <section id="adicionais" class="section" data-spy>
+    <header class="section-head reveal">
+      <div>
+        <p class="eyebrow"><span class="eyebrow-dot"></span>Extras</p>
+        <h2 class="section-title"><svg class="ic title-ic"><use href="#i-sliders"/></svg>Serviços Adicionais</h2>
+      </div>
+      <p class="section-lead">Personalize seu pedido com opções extras. Toque em <b>Adicionar</b> para incluir no orçamento.</p>
+    </header>
+    <div class="addon-grid" id="addonGrid"></div>
+
+    <aside class="important reveal" aria-labelledby="impTitle">
+      <div class="imp-text">
+        <h3 id="impTitle"><span class="imp-ic"><svg class="ic"><use href="#i-pin"/></svg></span>Importante</h3>
+        <p>Os percentuais acima representam um acréscimo sobre o valor final do pedido.</p>
+      </div>
+      <div class="imp-math" aria-label="Exemplo: pedido de R$ 100,00 com Seleção de Agentes (+20%) fica R$ 120,00">
+        <div class="math-chip"><small>Pedido</small><b>R$ 100,00</b></div>
+        <span class="math-op">+</span>
+        <div class="math-chip math-chip--accent"><small>Seleção de Agentes</small><b>+20%</b></div>
+        <span class="math-op">=</span>
+        <div class="math-chip math-chip--total"><small>Total</small><b id="impTotal">R$ 120,00</b></div>
+      </div>
+    </aside>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section id="faq" class="section" data-spy>
+    <div class="faq-wrap">
+      <div class="faq-side reveal">
+        <p class="eyebrow"><span class="eyebrow-dot"></span>Dúvidas</p>
+        <h2 class="section-title">Perguntas frequentes</h2>
+        <p class="section-lead">Não achou sua resposta? Chame a equipe no ticket.</p>
+        <div class="faq-help card">
+          <img src="assets/agents/jett.webp" alt="" loading="lazy">
+          <div><b>Fale com a gente</b><p>Resposta no ticket do <span class="dc-inline"><img src="assets/social/discord.webp" alt="">Discord</span>, geralmente em minutos.</p>
+          <button type="button" class="btn btn-primary btn-sm js-ticket"><svg class="ic"><use href="#i-chat"/></svg><span>Abrir ticket</span></button></div>
+        </div>
+      </div>
+      <div class="faq-list reveal" id="faqList"></div>
+    </div>
+  </section>
+
+  <!-- ============ RANK EXPERIENCE (scroll → frame → canvas) ============ -->
+  <section id="rankExperience" class="rank-xp" aria-label="Do Ferro ao Radiante: progressão de ranks controlada pela rolagem">
+    <div class="rank-sticky">
+      <img class="rank-poster" id="rankPoster" src="assets/rank-frames/frame-0003.webp" alt="" loading="lazy" decoding="async">
+      <canvas id="rankCanvas" aria-hidden="true"></canvas>
+      <video class="rank-fallback" id="rankFallback" muted playsinline preload="none" hidden aria-hidden="true"></video>
+      <div class="rx-fade rx-fade-top" aria-hidden="true"></div>
+      <div class="rx-fade rx-fade-bottom" aria-hidden="true"></div>
+
+      <div class="rank-overlay">
+        <header class="rx-top">
+          <span class="rx-tag"><i class="rx-blip" aria-hidden="true"></i>ELOPLUS <em>//</em> RANK EXPERIENCE</span>
+          <div class="rx-count">
+            <small>Rank progress</small>
+            <b><span id="rxNum">01</span><em> / 09</em></b>
+            <span class="rx-name" id="rxName">Ferro</span>
+          </div>
+        </header>
+
+        <span class="rx-micro rx-micro-l" aria-hidden="true">X 0412 · Y 1180<br>SECTOR // A-SITE</span>
+        <span class="rx-micro rx-micro-r" aria-hidden="true">RR <b id="rxRR">00</b><br>SIGNAL ▮▮▮▯</span>
+        <span class="rx-cross" aria-hidden="true"></span>
+
+        <div class="rx-bottom">
+          <div class="rx-copy" id="rxCopy" aria-live="polite">
+            <p class="rx-line is-on">Todo progresso<br>começa em algum lugar.</p>
+            <p class="rx-line">A próxima divisão<br>está mais perto.</p>
+            <p class="rx-line">Continue<br>subindo.</p>
+            <p class="rx-line">Agora começa<br>o high elo.</p>
+            <p class="rx-line">Cada vitória<br>importa.</p>
+            <p class="rx-line">Você está<br>perto do topo.</p>
+            <p class="rx-line">Até onde<br>você quer chegar?</p>
+            <div class="rx-final" id="rxFinal">
+              <p class="rx-f1">Do Ferro ao Radiante.</p>
+              <p class="rx-f2">Você escolhe<br>até onde quer chegar.</p>
+              <a href="#calc" class="btn btn-primary btn-lg rx-cta" id="rxCta" tabindex="-1"><span>Calcular meu boost</span><svg class="ic"><use href="#i-arrow"/></svg></a>
+            </div>
+          </div>
+
+          <div class="rx-bar">
+            <span>Ferro</span>
+            <div class="rx-track" id="rxTrack"><i id="rxFill"></i><b id="rxDot"></b></div>
+            <span>Radiante</span>
+          </div>
+        </div>
+
+        <div class="rx-hint" id="rxHint" aria-hidden="true"><span>Role para subir</span><i></i></div>
+
+        <div class="rx-loader" id="rxLoader" role="status">
+          <b>ELO<em>PLUS</em></b>
+          <small>Carregando experiência</small>
+          <div class="rx-load-track"><i id="rxLoadFill"></i></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="#home" aria-label="EloPlus — início">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 40 40"><path d="M20 3 36 12v16L20 37 4 28V12z" class="bm-hex"/><path d="M13 22.5 20 15.5l7 7" class="bm-up"/><path d="M13 28 20 21l7 7" class="bm-up bm-up2"/></svg>
+          </span>
+          <span class="brand-text"><b>Elo<em>Plus</em></b><small>Valorant Boost</small></span>
+        </a>
+        <p>Elo boost de Valorant com preço por divisão, pacotes high elo e atendimento direto pelo ticket.</p>
+      </div>
+      <nav class="foot-col" aria-label="Links rápidos">
+        <h4>Navegação</h4>
+        <a href="#precos">Preços por Divisão</a>
+        <a href="#pacotes">Pacotes High Elo</a>
+        <a href="#adicionais">Serviços Adicionais</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <div class="foot-col">
+        <h4>Comunidade</h4>
+        <a href="#" class="social js-social" data-net="discord"><img src="assets/social/discord.webp" alt=""><span><b>Discord</b><small>Tickets e suporte</small></span></a>
+      </div>
+      <div class="foot-cta">
+        <h4>Pronto para subir?</h4>
+        <button type="button" class="btn btn-primary js-ticket"><svg class="ic"><use href="#i-ticket"/></svg><span>Abrir ticket</span></button>
+      </div>
+    </div>
+    <div class="foot-credit">
+      <img class="or7 or7-on-dark" src="assets/or7-dark.png" alt="Or7 — idealizado e desenvolvido por Lorenzo Orsetti">
+      <img class="or7 or7-on-light" src="assets/or7-light.png" alt="Or7 — idealizado e desenvolvido por Lorenzo Orsetti">
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 EloPlus. Todos os direitos reservados.</span>
+      <span>EloPlus não é afiliado à Riot Games. VALORANT é marca da Riot Games, Inc.</span>
+    </div>
+  </footer>
+</main>
+
+<!-- dock (mobile) -->
+<nav class="dock" aria-label="Navegação">
+  <a href="#home" class="dock-link is-active" data-section="home"><svg class="ic"><use href="#i-home"/></svg><span>Home</span></a>
+  <a href="#precos" class="dock-link" data-section="precos"><svg class="ic"><use href="#i-crown"/></svg><span>Preços</span></a>
+  <a href="#contratar" class="dock-link" data-section="contratar"><svg class="ic"><use href="#i-ticket"/></svg><span>Contratar</span></a>
+  <a href="#pacotes" class="dock-link" data-section="pacotes"><svg class="ic"><use href="#i-gem"/></svg><span>Pacotes</span></a>
+  <a href="#adicionais" class="dock-link" data-section="adicionais"><svg class="ic"><use href="#i-sliders"/></svg><span>Extras</span></a>
+  <a href="#faq" class="dock-link" data-section="faq"><svg class="ic"><use href="#i-faq"/></svg><span>FAQ</span></a>
+</nav>
+
+<div class="toast" id="toast" role="status" aria-live="polite"><svg class="ic"><use href="#i-check"/></svg><span id="toastMsg"></span></div>
+
+<script src="js/main.js"></script>
+<script src="js/rank-experience.js"></script>
+</body>
+</html>
